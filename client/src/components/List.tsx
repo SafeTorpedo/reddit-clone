@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { get } from "../api";
 
@@ -19,7 +20,7 @@ const List = () => {
             {posts.map((post) => {
                 return (
                     <h1 key={post.id}>
-                        <a href="*">{post.title}</a>
+                        <Link to={`/posts/${post.id}`}>{post.title}</Link>
                     </h1>
                 );
             })}
