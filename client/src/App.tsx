@@ -1,5 +1,11 @@
+import List from "./components/List";
+
 function App() {
-    return <div>Reddit Clone</div>;
+    return (
+        <>
+            <List />
+        </>
+    );
 }
 
 export default App;
