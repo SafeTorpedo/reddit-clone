@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";
+import Provider from "./context/Provider";
+import Post from "./components/Post";
 
 function App() {
     return (
@@ -9,7 +11,14 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/posts" element={<Posts />} />
-                    <Route path="/posts/:id" element={null} />
+                    <Route
+                        path="/posts/:id"
+                        element={
+                            <Provider>
+                                <Post />
+                            </Provider>
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </>

@@ -9,4 +9,8 @@ const get = async (url: string) => {
     return await api.get(url);
 };
 
-export { get };
+const getPosts = async (id: string) => {
+    return await api.get(`/posts/${id}`);
+};
+
+export { get, getPosts };

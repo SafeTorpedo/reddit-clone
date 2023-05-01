@@ -16,7 +16,7 @@ const List = () => {
         return <div>Loading...</div>;
     }
     return (
-        <div>
+        <div className=" w-max m-auto">
             {posts.map((post) => {
                 return (
                     <h1 key={post.id}>
