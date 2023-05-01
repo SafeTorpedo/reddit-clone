@@ -10,6 +10,7 @@ const Comment = ({ data }) => {
                 <p>{data.user.name}</p>
                 <p>{formatter.format(Date.parse(data.createdAt))}</p>
                 <h3>{data.comment}</h3>
+                <div></div>
             </div>
         </>
     );
