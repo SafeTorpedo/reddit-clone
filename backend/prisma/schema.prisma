@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id      String     @id @default(uuid())
+  name    String
+  comment Comments[]
+  post    Post[]
+  upvote  Upvotes[]
+}
+
+model Post {
+  id        String     @id @default(uuid())
+  title     String
+  body      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comments[]
+}
+
+model Comments {
+  id        String   @id @default(uuid())
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  parentId String?
+  parent   Comments?  @relation("Parent", fields: [parentId], references: [id], onDelete: Cascade)
+  children Comments[] @relation("Parent")
+  upvote   Upvotes[]
+}
+
+model Upvotes {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commentId String
+  comment   Comments @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, commentId])
+}
