@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";
-import Provider from "./context/Provider";
+import { Provider } from "./context/Provider";
 import Post from "./components/Post";
 
 function App() {
