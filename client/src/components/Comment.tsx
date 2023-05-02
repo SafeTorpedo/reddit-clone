@@ -41,37 +41,41 @@ const Comment = ({ data }) => {
 
     return (
         <>
-            <div>
-                <p>{data.user.name}</p>
-                <p>{formatter.format(Date.parse(data.createdAt))}</p>
+            <div className="w-1/2 border border-black rounded-3xl p-2 m-2 ">
+                <div className="grid grid-cols-2 text-xs ">
+                    <h3>{data.user.name}</h3>
+                    <h3 className=" text-right">
+                        {formatter.format(Date.parse(data.createdAt))}
+                    </h3>
+                </div>
                 {edit ? (
                     <Form onSubmit={onUpdate} initial={data.comment} />
                 ) : (
-                    <h3>{data.comment}</h3>
+                    <h3 className=" text-lg font-semibold">{data.comment}</h3>
                 )}
 
-                <div>
+                <div className="p-1">
                     <BiUpvote className="inline" />
                     10
                     <BsReply
                         onClick={() => setReply((prev) => !prev)}
-                        className="inline"
+                        className="inline ml-4"
                         color={reply ? "black" : "grey"}
                     />
                     <BiEdit
                         onClick={() => setEdit((prev) => !prev)}
-                        className="inline"
+                        className="inline ml-4"
                         color={edit ? "black" : "grey"}
                     />
                     <AiFillDelete
                         onClick={onDelete}
-                        className="inline"
+                        className="inline ml-4"
                         color="red"
                     />
                 </div>
             </div>
             {reply ? (
-                <div className="mt-2 ml-4">
+                <div className=" ml-10">
                     <Form onSubmit={onReply} />
                 </div>
             ) : null}

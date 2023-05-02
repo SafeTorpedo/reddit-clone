@@ -9,13 +9,19 @@ const Form = ({ onSubmit, initial = "" }) => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <div>
+            <div className="p-2">
                 <textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="border border-black"
+                    className="border border-black rounded-xl w-1/3 p-2"
+                    placeholder="Enter new comment"
                 />
-                <button type="submit">Post</button>
+                <button
+                    type="submit"
+                    className=" border-black rounded-lg p-1 border bg-orange-600 text-white ml-2"
+                >
+                    Post
+                </button>
             </div>
         </form>
     );

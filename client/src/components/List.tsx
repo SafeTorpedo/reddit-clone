@@ -13,10 +13,14 @@ const List = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className=" font-bold text-4xl text-center text-orange-600">
+                Loading...
+            </div>
+        );
     }
     return (
-        <div className=" w-max m-auto">
+        <div className=" w-max text-left m-10 font-medium text-orange-600">
             {posts.map((post) => {
                 return (
                     <h1 key={post.id}>

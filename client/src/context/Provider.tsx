@@ -37,7 +37,11 @@ const Provider = ({ children }) => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="font-bold text-4xl text-center text-orange-600">
+                Loading...
+            </div>
+        );
     }
 
     return (
