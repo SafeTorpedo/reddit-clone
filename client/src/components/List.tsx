@@ -13,7 +13,7 @@ const List = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
+    const [selectedId, setSelectedId] = useState("");
     useEffect(() => {
         get("/posts").then((res) => {
             setPosts(res.data);
@@ -40,7 +40,7 @@ const List = () => {
     };
     return (
         <div className=" w-max text-left m-10 font-medium text-orange-600">
-            {posts.map((post) => {
+            {posts.map((post: { id: string; title: string }) => {
                 return (
                     <h1 className=" text-xl underline" key={post.id}>
                         <Link to={`/posts/${post.id}`}>{post.title}</Link>

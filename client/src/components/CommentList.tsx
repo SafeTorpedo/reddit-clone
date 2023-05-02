@@ -1,6 +1,10 @@
 import Comment from "./Comment";
 
-const CommentList = ({ data }) => {
+interface IRoot {
+    data: string[];
+}
+
+const CommentList = ({ data }: IRoot) => {
     return (
         <>
             {data.map((comment) => {

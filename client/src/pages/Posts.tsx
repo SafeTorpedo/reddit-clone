@@ -17,7 +17,7 @@ const Posts = () => {
         setOpen(false);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setOpen(false);
 
@@ -27,7 +27,6 @@ const Posts = () => {
         <>
             <Navbar />
             <List />
-            {/* button to create a new post */}
             <div className="fixed bottom-0 right-0 m-4">
                 <button
                     onClick={() => setOpen(true)}

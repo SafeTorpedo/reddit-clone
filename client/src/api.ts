@@ -13,7 +13,7 @@ const getPosts = async (id: string) => {
     return await api.get(`/posts/${id}`);
 };
 
-const newComment = async (postId, parentId, comment) => {
+const newComment = async (postId: string, parentId: any, comment: string) => {
     //pass parentId and comment as headers
     console.log(parentId);
     const payload = {
@@ -27,7 +27,11 @@ const newComment = async (postId, parentId, comment) => {
     });
 };
 
-const updateComment = async (postId, commentId, comment) => {
+const updateComment = async (
+    postId: string,
+    commentId: string,
+    comment: string
+) => {
     const payload = { comment };
     return await api.put(`/posts/${postId}/comments/${commentId}`, payload, {
         headers: {
@@ -36,11 +40,11 @@ const updateComment = async (postId, commentId, comment) => {
     });
 };
 
-const deleteComment = async (postId, commentId) => {
+const deleteComment = async (postId: string, commentId: string) => {
     return await api.delete(`/posts/${postId}/comments/${commentId}`);
 };
 
-const newPost = async (title, body) => {
+const newPost = async (title: string, body: string) => {
     const payload = {
         title,
         body,
@@ -52,7 +56,7 @@ const newPost = async (title, body) => {
     });
 };
 
-const deletePost = async (postId) => {
+const deletePost = async (postId: string) => {
     return await api.delete(`/posts/${postId}`);
 };
 

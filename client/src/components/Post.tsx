@@ -7,9 +7,7 @@ import Navbar from "./Navbar";
 const Post = () => {
     const { post, root } = usePost();
 
-    const onCommentCreate = async (comment) => {
-        console.log(post.id);
-
+    const onCommentCreate = async (comment: string) => {
         await newComment(post.id, null, comment);
     };
 

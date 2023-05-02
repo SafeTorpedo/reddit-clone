@@ -1,8 +1,14 @@
 import { useState } from "react";
 
-const Form = ({ onSubmit, initial = "" }) => {
+const Form = ({
+    onSubmit,
+    initial = "",
+}: {
+    onSubmit: (comment: string) => void;
+    initial?: string;
+}) => {
     const [comment, setComment] = useState(initial);
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(comment);
         setComment("");

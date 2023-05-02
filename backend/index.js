@@ -56,7 +56,6 @@ app.get("/posts/:id", async (req, res) => {
 
 app.post("/posts/:id/comments", async (req, res) => {
     const { id } = req.params;
-    console.log(req.body);
 
     const { parentId, comment } = req.body;
 

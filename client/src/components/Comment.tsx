@@ -18,29 +18,37 @@ const formatter = new Intl.DateTimeFormat(undefined, {
     timeStyle: "short",
 });
 
-const Comment = ({ data }) => {
+interface IData {
+    data: {
+        id: string;
+        comment: string;
+        createdAt: string;
+        user: {
+            name: string;
+        };
+    };
+}
+
+const Comment = ({ data }: IData) => {
     const { replies, post } = usePost();
 
     const child = replies(data.id);
     const [reply, setReply] = useState(false);
     const [edit, setEdit] = useState(false);
 
-    const onReply = async (comment) => {
-        console.log(post.id, data.id, comment);
+    const onReply = async (comment: string) => {
         setReply(false);
 
         await newComment(post.id, data.id, comment);
     };
 
-    const onUpdate = async (comment) => {
-        console.log(post.id, data.id, comment);
+    const onUpdate = async (comment: string) => {
         setEdit(false);
 
         await updateComment(post.id, data.id, comment);
     };
 
     const onDelete = async () => {
-        console.log(post.id, data.id);
         setOpen(false);
 
         await deleteComment(post.id, data.id);

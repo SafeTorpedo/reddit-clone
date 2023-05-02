@@ -7,7 +7,11 @@ const usePost = () => {
     return useContext(context);
 };
 
-const Provider = ({ children }) => {
+interface IChildren {
+    children: React.ReactNode;
+}
+
+const Provider = ({ children }: IChildren) => {
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState({});
     const [root, setRoot] = useState([]);
@@ -32,7 +36,7 @@ const Provider = ({ children }) => {
         });
     }, [comments]);
 
-    const replies = (parentId) => {
+    const replies = (parentId: string) => {
         return comments[parentId];
     };
 
