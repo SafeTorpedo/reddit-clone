@@ -40,4 +40,28 @@ const deleteComment = async (postId, commentId) => {
     return await api.delete(`/posts/${postId}/comments/${commentId}`);
 };
 
-export { get, getPosts, newComment, updateComment, deleteComment };
+const newPost = async (title, body) => {
+    const payload = {
+        title,
+        body,
+    };
+    return await api.post("/posts", payload, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+};
+
+const deletePost = async (postId) => {
+    return await api.delete(`/posts/${postId}`);
+};
+
+export {
+    get,
+    getPosts,
+    newComment,
+    updateComment,
+    deleteComment,
+    newPost,
+    deletePost,
+};

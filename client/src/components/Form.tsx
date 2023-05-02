@@ -16,12 +16,11 @@ const Form = ({ onSubmit, initial = "" }) => {
                     className="border border-black rounded-xl w-1/3 p-2"
                     placeholder="Enter new comment"
                 />
-                <button
-                    type="submit"
-                    className=" border-black rounded-lg p-1 border bg-orange-600 text-white ml-2"
-                >
-                    Post
-                </button>
+                <div className="m-2">
+                    <button className="bg-orange-600 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-full">
+                        Post
+                    </button>
+                </div>
             </div>
         </form>
     );

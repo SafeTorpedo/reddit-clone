@@ -110,6 +110,33 @@ app.delete("/posts/:id/comments/:commentId", async (req, res) => {
     });
 });
 
+app.post("/posts", async (req, res) => {
+    const { title, body } = req.body;
+
+    return await prisma.post.create({
+        data: {
+            title: title,
+            body: body,
+            userId: "d575b25a-cd17-4041-a51b-43b5ef78fa19",
+        },
+        select: {
+            id: true,
+            title: true,
+            body: true,
+        },
+    });
+});
+
+app.delete("/posts/:id", async (req, res) => {
+    const { id } = req.params;
+
+    return await prisma.post.delete({
+        where: {
+            id: id,
+        },
+    });
+});
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000.");
 });
