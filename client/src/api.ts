@@ -16,19 +16,28 @@ const getPosts = async (id: string) => {
 const newComment = async (postId, parentId, comment) => {
     //pass parentId and comment as headers
     console.log(parentId);
-
-    return await api.post(
-        `/posts/${postId}/comments`,
-        {
-            parentId: parentId,
-            comment: comment,
+    const payload = {
+        parentId,
+        comment,
+    };
+    return await api.post(`/posts/${postId}/comments`, payload, {
+        headers: {
+            "Content-Type": "application/json",
         },
-        {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-    );
+    });
 };
 
-export { get, getPosts, newComment };
+const updateComment = async (postId, commentId, comment) => {
+    const payload = { comment };
+    return await api.put(`/posts/${postId}/comments/${commentId}`, payload, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+};
+
+const deleteComment = async (postId, commentId) => {
+    return await api.delete(`/posts/${postId}/comments/${commentId}`);
+};
+
+export { get, getPosts, newComment, updateComment, deleteComment };

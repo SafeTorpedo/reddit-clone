@@ -12,6 +12,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 app.get("/posts", async (req, res) => {
     const posts = await prisma.post.findMany({
@@ -55,9 +56,9 @@ app.get("/posts/:id", async (req, res) => {
 
 app.post("/posts/:id/comments", async (req, res) => {
     const { id } = req.params;
+    console.log(req.body);
 
     const { parentId, comment } = req.body;
-    console.log(parentId, comment);
 
     return await prisma.comments.create({
         data: {
@@ -78,6 +79,33 @@ app.post("/posts/:id/comments", async (req, res) => {
             comment: true,
             parentId: true,
             createdAt: true,
+        },
+    });
+});
+
+app.put("/posts/:id/comments/:commentId", async (req, res) => {
+    const { id, commentId } = req.params;
+    const { comment } = req.body;
+
+    return await prisma.comments.update({
+        where: {
+            id: commentId,
+        },
+        data: {
+            comment: comment,
+        },
+        select: {
+            comment: true,
+        },
+    });
+});
+
+app.delete("/posts/:id/comments/:commentId", async (req, res) => {
+    const { id, commentId } = req.params;
+
+    return await prisma.comments.delete({
+        where: {
+            id: commentId,
         },
     });
 });

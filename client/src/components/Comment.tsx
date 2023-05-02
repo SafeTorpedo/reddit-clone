@@ -5,7 +5,7 @@ import { usePost } from "../context/Provider";
 import CommentList from "./CommentList";
 import { useState } from "react";
 import Form from "./Form";
-import { newComment } from "../api";
+import { deleteComment, newComment, updateComment } from "../api";
 
 const formatter = new Intl.DateTimeFormat(undefined, {
     dateStyle: "short",
@@ -17,19 +17,39 @@ const Comment = ({ data }) => {
 
     const child = replies(data.id);
     const [reply, setReply] = useState(false);
+    const [edit, setEdit] = useState(false);
 
     const onReply = async (comment) => {
         console.log(post.id, data.id, comment);
+        setReply(false);
 
         await newComment(post.id, data.id, comment);
-        setReply((prev) => !prev);
     };
+
+    const onUpdate = async (comment) => {
+        console.log(post.id, data.id, comment);
+        setEdit(false);
+
+        await updateComment(post.id, data.id, comment);
+    };
+
+    const onDelete = async () => {
+        console.log(post.id, data.id);
+
+        await deleteComment(post.id, data.id);
+    };
+
     return (
         <>
             <div>
                 <p>{data.user.name}</p>
                 <p>{formatter.format(Date.parse(data.createdAt))}</p>
-                <h3>{data.comment}</h3>
+                {edit ? (
+                    <Form onSubmit={onUpdate} initial={data.comment} />
+                ) : (
+                    <h3>{data.comment}</h3>
+                )}
+
                 <div>
                     <BiUpvote className="inline" />
                     10
@@ -38,8 +58,16 @@ const Comment = ({ data }) => {
                         className="inline"
                         color={reply ? "black" : "grey"}
                     />
-                    <BiEdit className="inline" />
-                    <AiFillDelete className="inline" color="red" />
+                    <BiEdit
+                        onClick={() => setEdit((prev) => !prev)}
+                        className="inline"
+                        color={edit ? "black" : "grey"}
+                    />
+                    <AiFillDelete
+                        onClick={onDelete}
+                        className="inline"
+                        color="red"
+                    />
                 </div>
             </div>
             {reply ? (
