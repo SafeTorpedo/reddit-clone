@@ -6,6 +6,12 @@ import CommentList from "./CommentList";
 import { useState } from "react";
 import Form from "./Form";
 import { deleteComment, newComment, updateComment } from "../api";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 
 const formatter = new Intl.DateTimeFormat(undefined, {
     dateStyle: "short",
@@ -35,8 +41,14 @@ const Comment = ({ data }) => {
 
     const onDelete = async () => {
         console.log(post.id, data.id);
+        setOpen(false);
 
         await deleteComment(post.id, data.id);
+    };
+
+    const [open, setOpen] = useState(false);
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -68,7 +80,7 @@ const Comment = ({ data }) => {
                         color={edit ? "black" : "grey"}
                     />
                     <AiFillDelete
-                        onClick={onDelete}
+                        onClick={() => setOpen(true)}
                         className="inline ml-4"
                         color="red"
                     />
@@ -84,6 +96,18 @@ const Comment = ({ data }) => {
                     <CommentList data={child} />
                 </div>
             ) : null}
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle id="alert-dialog-title">Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Do you want to delete this comment?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={onDelete}>Delete</Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 };
