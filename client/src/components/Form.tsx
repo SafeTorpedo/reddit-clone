@@ -4,7 +4,8 @@ const Form = ({ onSubmit, initial = "" }) => {
     const [comment, setComment] = useState(initial);
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(comment).then(() => setComment(""));
+        onSubmit(comment);
+        setComment("");
     };
     return (
         <form onSubmit={handleSubmit}>

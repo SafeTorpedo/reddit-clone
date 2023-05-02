@@ -30,7 +30,7 @@ const Provider = ({ children }) => {
             setComments(nest);
             setRoot(nest[null]);
         });
-    }, []);
+    }, [comments]);
 
     const replies = (parentId) => {
         return comments[parentId];

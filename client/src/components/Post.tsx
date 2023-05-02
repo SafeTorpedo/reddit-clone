@@ -7,8 +7,7 @@ const Post = () => {
     const { post, root } = usePost();
 
     const onCommentCreate = async (comment) => {
-        const comment_1 = await newComment(post.id, null, comment);
-        return console.log(comment_1);
+        await newComment(post.id, null, comment);
     };
 
     return (

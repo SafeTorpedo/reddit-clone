@@ -14,9 +14,11 @@ const getPosts = async (id: string) => {
 };
 
 const newComment = async (postId, parentId, comment) => {
-    return await api.post(`post/${postId}/comments`, {
-        Headers: {
-            data: { parentId, comment },
+    //pass parentId and comment as headers
+    return await api.post(`/posts/${postId}/comments`, null, {
+        headers: {
+            parentId,
+            comment,
         },
     });
 };
