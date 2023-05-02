@@ -55,7 +55,9 @@ app.get("/posts/:id", async (req, res) => {
 
 app.post("/posts/:id/comments", async (req, res) => {
     const { id } = req.params;
-    const { comment, parentId } = req.headers;
+
+    const { parentId, comment } = req.body;
+    console.log(parentId, comment);
 
     return await prisma.comments.create({
         data: {

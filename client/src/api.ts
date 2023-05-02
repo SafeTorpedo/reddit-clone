@@ -15,12 +15,20 @@ const getPosts = async (id: string) => {
 
 const newComment = async (postId, parentId, comment) => {
     //pass parentId and comment as headers
-    return await api.post(`/posts/${postId}/comments`, null, {
-        headers: {
-            parentId,
-            comment,
+    console.log(parentId);
+
+    return await api.post(
+        `/posts/${postId}/comments`,
+        {
+            parentId: parentId,
+            comment: comment,
         },
-    });
+        {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
 };
 
 export { get, getPosts, newComment };
