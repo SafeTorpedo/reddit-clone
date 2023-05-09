@@ -34,13 +34,19 @@ npm install
 
 4. Create a .env file in the backend folder and contact me for the environment variables
 
-5. Start the backend server
+5. Generate the Prisma client in the backend folder
+
+```bash
+npx prisma generate
+```
+
+6. Start the backend server
 
 ```bash
 npm start
 ```
 
-6. Start the client server
+7. Start the client server
 
 ```bash
 cd ..
